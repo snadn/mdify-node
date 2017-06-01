@@ -20,11 +20,17 @@ module.exports = class MDify {
       mammoth
         .convertToHtml({path: this.options.source})
         .then(result => {
+          const html = result.value/* .replace(/<td><p>(.*?)<\/p><\/td>/g, function(_, s1) {
+            return '<td>' + s1.replace(/<\/p><p>/g, '<br/>') + '</td>'; // do this in to-markdown https://github.com/domchristie/to-markdown/pull/140
+          }) */.replace(/<table><tr>(.*?)<\/tr>/g, (_, s1) => {
+            return '<table><tr>' + s1.replace(/td/g, 'th') + '</tr>';
+          });
+
           if (this.options.debug) {
-            fs.writeFileAsync(this.options.debug, result.value);
+            fs.writeFileAsync(this.options.debug, html);
           }
 
-          resolve(result.value);
+          resolve(html);
         })
         .catch(err => {
           reject(err);

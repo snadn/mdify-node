@@ -25,3 +25,8 @@ Sometimes it's useful to have different levels of headings to structure your doc
 ### This is a third-tier heading
 
 You can use one `#` all the way up to `######` six for different heading sizes.
+
+|Th1|Th2|Th3|
+| --- | --- | --- |
+|Tr1td1|Tr1td2|Tr1td3|
+|Tr2td1|Tr2td2|Tr2td3|
